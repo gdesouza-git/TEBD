@@ -1,15 +1,17 @@
 from pymongo import MongoClient
-
+from dotenv import load_dotenv
+import os
 
 def get_database():
-    # Provide the mongodb atlas url to connect python to mongodb using pymongo
+    load_dotenv()
+    #os.environ['CONNECTION_STRING'] = os.getenv('CONNECTION_STRING')
+    # Provide the mongodb string to connect python to mongodb using pymongo
     CONNECTION_STRING = "mongodb://20.124.3.188:27017/"
-
-    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
+    # Create a connection using MongoClient
     client = MongoClient(CONNECTION_STRING)
 
-    # Create the database for our example (we will use the same database throughout the tutorial
-    return client['user_shopping_list']
+    # Create the database for our example
+    return client['tebd']
 
 
 # This is added so that many files can reuse the function get_database()

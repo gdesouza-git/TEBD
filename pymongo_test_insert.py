@@ -1,23 +1,14 @@
 # Get the database using the method we defined in pymongo_test_insert file
 from pymongo_get_database import get_database
+import random
+
 dbname = get_database()
-collection_name = dbname["user_1_items"]
+collection_name = dbname["tebd_col"]
+id = random.randint(1, 1000000)
+def insert(item):
+  insert_json = {
+    "_id" : id,
+    "text" : item
+  }
 
-item_1 = {
-  "_id" : "U1IT00001",
-  "item_name" : "Blender",
-  "max_discount" : "10%",
-  "batch_number" : "RR450020FRG",
-  "price" : 340,
-  "category" : "kitchen appliance"
-}
-
-item_2 = {
-  "_id" : "U1IT00002",
-  "item_name" : "Egg",
-  "category" : "food",
-  "quantity" : 12,
-  "price" : 36,
-  "item_description" : "brown country eggs"
-}
-collection_name.insert_many([item_1,item_2])
+  collection_name.insert_many([insert_json])

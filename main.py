@@ -1,8 +1,7 @@
 import azure.cognitiveservices.speech as speechsdk
 from dotenv import load_dotenv
 import os
-
-
+from pymongo_test_insert import insert
 load_dotenv()
 
 os.environ['SPEECH_KEY'] = os.getenv('SPEECH_KEY')
@@ -11,7 +10,7 @@ os.environ['SPEECH_REGION'] = os.getenv('SPEECH_REGION')
 def recognize_from_microphone():
     # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
     speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
-    speech_config.speech_recognition_language="en-US"
+    speech_config.speech_recognition_language="pt-BR"
 
     audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
@@ -21,6 +20,7 @@ def recognize_from_microphone():
 
     if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
         print("Recognized: {}".format(speech_recognition_result.text))
+        insert(speech_recognition_result.text)
     elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
         print("No speech could be recognized: {}".format(speech_recognition_result.no_match_details))
     elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
