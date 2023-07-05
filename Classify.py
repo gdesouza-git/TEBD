@@ -19,7 +19,7 @@ def classificar(audio):
 
     headers = {
        'Content-type': 'audio/wav;codec="audio/pcm";',
-       'Ocp-Apim-Subscription-Key': '02704c7016ac46288e0947217b38efb8',
+       'Ocp-Apim-Subscription-Key': '',
     }
 
     with open('audio.wav', 'rb') as payload:
